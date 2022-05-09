@@ -36,12 +36,13 @@ def func_th_0_thread(list,string):
     beginn = True
 
     lesen_RamSec0 = sRam.RamSec()
+    path0 = sRam.Path()
    
     time.sleep(2)
     ##Endlosschleife (verlassen nur durch Abrechen)
     while beginn == True:
         ######################################################################################
-        ## Daten aus dem Zwischenspeicher (Klasse -- List) in die RLZ-Auswertung (Excel) schreiben
+        ## Aus Vorlagenordner Excel-Datei öffnen und separat abspeichern
         #     
         main.semaphor_sRam_Sema.acquire()    ##Dekrementiert -1
         if lesen_RamSec0.start_datei[0] == 1:
@@ -49,7 +50,8 @@ def func_th_0_thread(list,string):
             print("Thread_0 Analysedaten_xlsx erzeugen und speichern!" + '-' * 60)
             try:
                 print("Excel-Datei-Vorlage oeffnen" + '-' * 60)
-                file = 'Vorlagen\Rolling_Analyse_RLZ_Gesamt.xlsx'
+                file = path0.vorlagePath
+                #file = 'Vorlagen\Rolling_Analyse_RLZ_Gesamt.xlsx'
                 fileXLSX = openpyxl.load_workbook(file)
 
             except Exception as erzeugen:
@@ -62,7 +64,8 @@ def func_th_0_thread(list,string):
             ## Auswertung speichern        
             try:
                 ##Excel-Datei speichern
-                fileXLSX.save('Result_Gesamt_Analyse_RLZ.xlsx')
+                fileXLSX.save(path0.ablagePath)
+                #fileXLSX.save('Result_Gesamt_Analyse_RLZ.xlsx')
                 print("Excel-Datei erzeugt/gespeichert" + '-' * 60)
                 
                 time.sleep(1)
@@ -84,8 +87,8 @@ def func_th_0_thread(list,string):
 
         # else:
         #     ##Start kann nicht durchgeführt werden
-        #     print("Thread_1 Daten loggen nicht hergestellt")
-        #     if lesen_RamSec1.beenden[0] == 1:
+        #     print("Thread_0")
+        #     if lesen_RamSec0.beenden[0] == 1:
         #         beginn = False
         #         break
         #         #sys.exit()

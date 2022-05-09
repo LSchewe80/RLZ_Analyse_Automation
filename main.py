@@ -20,9 +20,14 @@ import time
 
 ##Einbindung der Modules
 import sRam
+import th_0
 import th_1
 import th_2
-import th_0
+import th_3
+import th_4
+import th_5
+import th_6
+
 
 
 ##############################_Variablen_######################################
@@ -70,6 +75,14 @@ if __name__ == "__main__":
     f1 = threading.Thread(target = th_1.func_th_1_thread, args=(list,string1))
     string2 = "Thread_2 Analysedaten_xlsx startet!"
     f2 = threading.Thread(target = th_2.func_th_2_thread, args=(list,string2))
+    string3 = "Thread_3 Analysedaten_xlsx startet!"
+    f3 = threading.Thread(target = th_3.func_th_3_thread, args=(list,string3))
+    string4 = "Thread_4 Analysedaten_xlsx startet!"
+    f4 = threading.Thread(target = th_4.func_th_4_thread, args=(list,string4))
+    string5 = "Thread_5 Analysedaten_xlsx startet!"
+    f5 = threading.Thread(target = th_5.func_th_5_thread, args=(list,string5))
+    string6 = "Thread_6 Analysedaten_xlsx startet!"
+    f6 = threading.Thread(target = th_6.func_th_6_thread, args=(list,string6))
 
     time.sleep(2)
 
@@ -88,8 +101,21 @@ if __name__ == "__main__":
 
         #--------------------------------------------------------------------------
         ##Thread's starten
-        f1.start()
-        f2.start()
+        if ws == 1:
+            f1.start()
+        elif ws == 2:
+            f2.start()
+        elif ws == 3:
+            f3.start()
+        elif ws == 4:
+            f4.start()
+        elif ws == 5:
+            f5.start()
+        elif ws == 6:
+            pass
+            f6.start()
+        else:
+            print("Kein Woorksheet ausgewaehlt!")
 
         #--------------------------------------------------------------------------
         ##Freigabe an die Thread's

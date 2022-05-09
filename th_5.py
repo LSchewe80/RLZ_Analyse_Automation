@@ -31,14 +31,14 @@ import main
 
 ################################_THREAD_#######################################
 
-def func_th_2_thread(list,string):
+def func_th_5_thread(list,string):
     print(string)
     beginn = True
 
-    lesen_RamSec2 = sRam.RamSec()
-    schreiben_RamSec2 = sRam.RamSec()
-    data_Zwischerspeicher2 = sRam.Zwischenspeicher()
-    path2 = sRam.Path()
+    lesen_RamSec5 = sRam.RamSec()
+    schreiben_RamSec5 = sRam.RamSec()
+    data_Zwischerspeicher5 = sRam.Zwischenspeicher()
+    path5 = sRam.Path()
 
    
     time.sleep(2)
@@ -48,26 +48,26 @@ def func_th_2_thread(list,string):
         ## Daten aus der csv-Datei in die Zwischenspeicher (Klasse -- List)
         #  
         main.semaphor_sRam_Sema.acquire()    ##Dekrementiert -1
-        if lesen_RamSec2.start[0] == 1 and lesen_RamSec2.worksheet[0] == 2:
+        if lesen_RamSec5.start[0] == 1 and lesen_RamSec5.worksheet[0] == 5:
             main.semaphor_sRam_Sema.release()    ##Inkrementiert +1
             #Daten aus der CSV auslesen
             try:
-                with open('AnalyseDaten\RLZ_2.csv') as csvdatei:
+                with open('AnalyseDaten\RLZ_5.csv') as csvdatei:
                     print("CSV-Datei auslesen!" + '-' * 60)
                     csv_reader_object = csv.reader(csvdatei, delimiter=';')
                     row_csv = 0
                     column_csv = 0
-                    data_Zwischerspeicher2.funcClear()
+                    data_Zwischerspeicher5.funcClear()
                     for row in csv_reader_object:
                         #print(len(row))
                         #print(row)   ##Inhalt CSV --##Zu Ansicht einkommentieren
                         if len(row) > 1 and row[1] != "":
-                            data_Zwischerspeicher2.funcSpeicher0(row[1])  #Zeile Inhalt 2.Spalte
+                            data_Zwischerspeicher5.funcSpeicher0(row[1])  #Zeile Inhalt 2.Spalte
                             row_csv += 1
                     #beginn == False
                     #break
                     print(" ")
-                    print(len(data_Zwischerspeicher2.data_csv_i0))
+                    print(len(data_Zwischerspeicher5.data_csv_i0))
                     print(row_csv)
                     print(" ")
 
@@ -82,15 +82,15 @@ def func_th_2_thread(list,string):
         ## Daten aus dem Zwischenspeicher (Klasse -- List) in die RLZ-Auswertung (Excel) schreiben
         #     
         main.semaphor_sRam_Sema.acquire()    ##Dekrementiert -1
-        if lesen_RamSec2.start[0] == 1 and lesen_RamSec2.worksheet[0] == 2:
+        if lesen_RamSec5.start[0] == 1 and lesen_RamSec5.worksheet[0] == 5:
             main.semaphor_sRam_Sema.release()    ##Inkrementiert +1
-            print("Thread_2 Analysedaten_xlsx verarbeiten, in Tabelle einfuegen und speichern!" + '-' * 60)
+            print("Thread_5 Analysedaten_xlsx verarbeiten, in Tabelle einfuegen und speichern!" + '-' * 60)
             try:
                 print("Excel-Datei oeffnen" + '-' * 60)
-                file = path2.ablagePath
+                file = path5.ablagePath
                 #file = 'Result_Gesamt_Analyse_RLZ.xlsx'
                 fileXLSX = openpyxl.load_workbook(file)
-                sheet = fileXLSX["Analyse RLZ 23° #2_0 EEH-"]
+                sheet = fileXLSX["Analyse RLZ 23° #1_2 EEH-"]
                 #print(sheet['C4'].value)
 
                 #Rechner/User-Name
@@ -106,56 +106,56 @@ def func_th_2_thread(list,string):
                 zeile_xlmx = 7
                 spalte_xlmx = 3
                 zeile_csv = 0
-                for i in range(len(data_Zwischerspeicher2.data_csv_i0)):
-                    if data_Zwischerspeicher2.data_csv_i0[i] == "A" :
+                for i in range(len(data_Zwischerspeicher5.data_csv_i0)):
+                    if data_Zwischerspeicher5.data_csv_i0[i] == "A" :
                         pass
                         #print("A " + '-' * 60)
-                    if data_Zwischerspeicher2.data_csv_i0[i] == "B":
+                    if data_Zwischerspeicher5.data_csv_i0[i] == "B":
                         spalte_xlmx += 1
                         zeile_xlmx = 7
                         zeile_csv = 0
                         #print("B " + '-' * 60)
-                    if data_Zwischerspeicher2.data_csv_i0[i] == "C":
+                    if data_Zwischerspeicher5.data_csv_i0[i] == "C":
                         spalte_xlmx += 1
                         zeile_xlmx = 7
                         zeile_csv = 0
                         #print("C " + '-' * 60)
-                    if data_Zwischerspeicher2.data_csv_i0[i] == "D":
+                    if data_Zwischerspeicher5.data_csv_i0[i] == "D":
                         spalte_xlmx += 1
                         zeile_xlmx = 7
                         zeile_csv = 0
                         #print("D " + '-' * 60)
-                    if data_Zwischerspeicher2.data_csv_i0[i] == "E":
+                    if data_Zwischerspeicher5.data_csv_i0[i] == "E":
                         spalte_xlmx += 1
                         zeile_xlmx = 7
                         zeile_csv = 0
                         #print("E " + '-' * 60)
-                    if data_Zwischerspeicher2.data_csv_i0[i] == "F":
+                    if data_Zwischerspeicher5.data_csv_i0[i] == "F":
                         spalte_xlmx += 1
                         zeile_xlmx = 7
                         zeile_csv = 0
                         #print("F " + '-' * 60)
-                    if data_Zwischerspeicher2.data_csv_i0[i] == "G":
+                    if data_Zwischerspeicher5.data_csv_i0[i] == "G":
                         spalte_xlmx += 1
                         zeile_xlmx = 7
                         zeile_csv = 0
                         #print("G " + '-' * 60)
-                    if data_Zwischerspeicher2.data_csv_i0[i] == "H":
+                    if data_Zwischerspeicher5.data_csv_i0[i] == "H":
                         spalte_xlmx += 1
                         zeile_xlmx = 7
                         zeile_csv = 0
                         #print("H " + '-' * 60)
-                    if data_Zwischerspeicher2.data_csv_i0[i] == "I":
+                    if data_Zwischerspeicher5.data_csv_i0[i] == "I":
                         spalte_xlmx += 1
                         zeile_xlmx = 7
                         zeile_csv = 0
                         #print("I " + '-' * 60)
-                    if data_Zwischerspeicher2.data_csv_i0[i] == "J":
+                    if data_Zwischerspeicher5.data_csv_i0[i] == "J":
                         spalte_xlmx += 1
                         zeile_xlmx = 7
                         zeile_csv = 0
                         #print("J " + '-' * 60)
-                    if data_Zwischerspeicher2.data_csv_i0[i] == "K":
+                    if data_Zwischerspeicher5.data_csv_i0[i] == "K":
                         spalte_xlmx += 1
                         zeile_xlmx = 7
                         zeile_csv = 0
@@ -163,10 +163,10 @@ def func_th_2_thread(list,string):
 
                     
                     if zeile_csv > 0:
-                        #print(type(data_Zwischerspeicher2.data_csv_i0[i]))
-                        data_Zwischerspeicher2.data_csv_i0[i]=float(data_Zwischerspeicher2.data_csv_i0[i])#.replace(".", ",")
-                        #print(type(data_Zwischerspeicher2.data_csv_i0[i]))
-                        sheet.cell(row=zeile_xlmx, column=spalte_xlmx).value = data_Zwischerspeicher2.data_csv_i0[i]
+                        #print(type(data_Zwischerspeicher5.data_csv_i0[i]))
+                        data_Zwischerspeicher5.data_csv_i0[i]=float(data_Zwischerspeicher5.data_csv_i0[i])#.replace(".", ",")
+                        #print(type(data_Zwischerspeicher5.data_csv_i0[i]))
+                        sheet.cell(row=zeile_xlmx, column=spalte_xlmx).value = data_Zwischerspeicher5.data_csv_i0[i]
                         zeile_xlmx += 1
                         if zeile_xlmx == 14:
                             zeile_xlmx = 16
@@ -192,17 +192,17 @@ def func_th_2_thread(list,string):
             ## Auswertung speichern        
             try:
                 ##Excel-Datei speichern
-                fileXLSX.save(path2.ablagePath)
+                fileXLSX.save(path5.ablagePath)
                 #fileXLSX.save('Result_Gesamt_Analyse_RLZ.xlsx')
                 print("Excel-Datei gespeichert" + '-' * 60)
                 
                 time.sleep(1)
 
                 main.semaphor_sRam_Sema.acquire()    ##Dekrementiert -1
-                schreiben_RamSec2.funcClear()
-                schreiben_RamSec2.funcClearWorksheet()
-                schreiben_RamSec2.funcSec(0,1,1)
-                schreiben_RamSec2.funcWS(0)
+                schreiben_RamSec5.funcClear()
+                schreiben_RamSec5.funcClearWorksheet()
+                schreiben_RamSec5.funcSec(0,1,1)
+                schreiben_RamSec5.funcWS(0)
                 main.semaphor_sRam_Sema.release()    ##Inkrementiert +1
 
                 print("Eintrag fertig" + '-' * 60)
@@ -216,7 +216,7 @@ def func_th_2_thread(list,string):
                 break
         main.semaphor_sRam_Sema.release()    ##Inkrementiert +1        
 
-        if lesen_RamSec2.beenden[0] == 1:
+        if lesen_RamSec5.beenden[0] == 1:
             time.sleep(1)
             beginn = False
             break
@@ -224,10 +224,10 @@ def func_th_2_thread(list,string):
 
         # else:
         #     ##Start kann nicht durchgeführt werden
-        #     print("Thread_2 Daten loggen nicht hergestellt")
-        #     if lesen_RamSec2.beenden[0] == 1:
+        #     print("Thread_5 Daten loggen nicht hergestellt")
+        #     if lesen_RamSec5.beenden[0] == 1:
         #         beginn = False
         #         break
         #         #sys.exit()
 
-    print("Thread_2 Analysedaten_xlsx wird beendet!" + '-' * 60)
+    print("Thread_5 Analysedaten_xlsx wird beendet!" + '-' * 60)

@@ -27,6 +27,12 @@ class System():
         print(self.sys_vers[-1])
         print(self.python_vers[-1])
 ###############################################################################
+##Path-Klasse (Wo liegt die Vorlage / Wo soll die datei gespeichert werden)
+class Path():
+    vorlagePath = 'C:\\Users\\Lars.SCHEWE\\Unterlagen\\src\\Python\\Git_Repo\\RLZ_Analyse_Automation\\Vorlagen\\Rolling_Analyse_RLZ_Gesamt.xlsx'
+    ablagePath = '\\\\akka.eu\\PersonalFolders\\DE\WB1\\Lars.SCHEWE\\Desktop\\Result_Gesamt_Analyse_RLZ.xlsx'
+
+###############################################################################
 ##Befehlsklasse
 class RamSec():
     start_datei = [0]

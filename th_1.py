@@ -38,9 +38,10 @@ def func_th_1_thread(list,string):
     lesen_RamSec1 = sRam.RamSec()
     schreiben_RamSec1 = sRam.RamSec()
     data_Zwischerspeicher1 = sRam.Zwischenspeicher()
+    path1 = sRam.Path()
 
    
-    time.sleep(3)
+    time.sleep(2)
     ##Endlosschleife (verlassen nur durch Abrechen)
     while beginn == True:
         ######################################################################################
@@ -86,7 +87,8 @@ def func_th_1_thread(list,string):
             print("Thread_1 Analysedaten_xlsx verarbeiten, in Tabelle einfuegen und speichern!" + '-' * 60)
             try:
                 print("Excel-Datei oeffnen" + '-' * 60)
-                file = 'Result_Gesamt_Analyse_RLZ.xlsx'
+                file = path1.ablagePath
+                #file = 'Result_Gesamt_Analyse_RLZ.xlsx'
                 fileXLSX = openpyxl.load_workbook(file)
                 sheet = fileXLSX["Analyse RLZ 23° #1_0 EEH-"]
                 #print(sheet['C4'].value)
@@ -190,10 +192,11 @@ def func_th_1_thread(list,string):
             ## Auswertung speichern        
             try:
                 ##Excel-Datei speichern
-                fileXLSX.save('Result_Gesamt_Analyse_RLZ.xlsx')
+                fileXLSX.save(path1.ablagePath)
+                #fileXLSX.save('Result_Gesamt_Analyse_RLZ.xlsx')
                 print("Excel-Datei gespeichert" + '-' * 60)
                 
-                time.sleep(2)
+                time.sleep(1)
 
                 main.semaphor_sRam_Sema.acquire()    ##Dekrementiert -1
                 schreiben_RamSec1.funcClear()
@@ -214,7 +217,7 @@ def func_th_1_thread(list,string):
         main.semaphor_sRam_Sema.release()    ##Inkrementiert +1        
 
         if lesen_RamSec1.beenden[0] == 1:
-            time.sleep(2)
+            time.sleep(1)
             beginn = False
             break
             #sys.exit()
