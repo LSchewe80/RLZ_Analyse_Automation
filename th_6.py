@@ -90,7 +90,7 @@ def func_th_6_thread(list,string):
                 file = path6.ablagePath
                 #file = 'Result_Gesamt_Analyse_RLZ.xlsx'
                 fileXLSX = openpyxl.load_workbook(file)
-                sheet = fileXLSX["Analyse RLZ 23° #2_2 EEH-"]
+                sheet = fileXLSX["Analyse RLZ 23° #3_1 EEH-"]
                 #print(sheet['C4'].value)
 
                 #Rechner/User-Name

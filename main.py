@@ -27,6 +27,9 @@ import th_3
 import th_4
 import th_5
 import th_6
+import th_7
+import th_8
+import th_9
 
 
 
@@ -83,6 +86,12 @@ if __name__ == "__main__":
     f5 = threading.Thread(target = th_5.func_th_5_thread, args=(list,string5))
     string6 = "Thread_6 Analysedaten_xlsx startet!"
     f6 = threading.Thread(target = th_6.func_th_6_thread, args=(list,string6))
+    string7 = "Thread_7 Analysedaten_xlsx startet!"
+    f7 = threading.Thread(target = th_7.func_th_7_thread, args=(list,string7))
+    string8 = "Thread_8 Analysedaten_xlsx startet!"
+    f8 = threading.Thread(target = th_8.func_th_8_thread, args=(list,string8))
+    string9 = "Thread_9 Analysedaten_xlsx startet!"
+    f9 = threading.Thread(target = th_9.func_th_9_thread, args=(list,string9))
 
     time.sleep(2)
 
@@ -90,10 +99,10 @@ if __name__ == "__main__":
     ##Auswahl des Worksheet's
     print("")
     print("Befüllen der Exceldatei nur bei erzeugter Vorlage möglich!")
-    print("Um zu Beenden != 1 - 6 eingeben!")
-    ws = int(input("Bitte wählen Sie das WorkSheet aus (1 - 6): "))
+    print("Um zu Beenden != 1 - 9 eingeben!")
+    ws = int(input("Bitte wählen Sie das WorkSheet aus (1 - 9): "))
 
-    if ws > 0 and ws < 7:
+    if ws > 0 and ws < 10:
         semaphor_sRam_Sema.acquire()    ##Dekrementiert -1
         schreiben_RamSec.funcClearWorksheet()
         schreiben_RamSec.funcWS(ws)
@@ -112,8 +121,13 @@ if __name__ == "__main__":
         elif ws == 5:
             f5.start()
         elif ws == 6:
-            pass
             f6.start()
+        elif ws == 7:
+            f7.start()
+        elif ws == 8:
+            f8.start()
+        elif ws == 9:
+            f9.start()
         else:
             print("Kein Woorksheet ausgewaehlt!")
 
